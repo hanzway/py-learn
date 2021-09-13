@@ -9,16 +9,16 @@ the_user_data = [
     {'user':'tom', 'password':'123456'},
     {'user':'Jerry', 'password':'654321'},
     {'user':'Morty', 'password':'11'},
-    {'user':'Morty', 'password': '77'},
+    {'user':'Morty', 'password': '77'}
 ]
 
 
-@pytest.fixture(scope='function')
+@pytest.fixture(scope='module')
 def login_r(request):
     # 可以通过dict形式，虽然传递的是一个参数，但通过key的方式可以达到类似传入多个参数的效果
     username = request.param['user']
     password = request.param['password']
-    print('\n打开首页，准备登录，登录用户:{}----{}'.format(username, password))
+    print('\n打开浏览器，输入网址，准备登录，登录用户:{}----{}'.format(username, password))
     if password:
         return True
     else:
@@ -33,7 +33,6 @@ def test_login(login_r):
     login_result = login_r
     print('\n测试该用例中，登陆的返回值是： {}'.format(login_result))
     assert login_result, '\n用户名与密码不匹配，登陆失败。'
-
 
 
 if __name__ == '__main__':
