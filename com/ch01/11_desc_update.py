@@ -55,14 +55,26 @@ class Typed:
         instance.__dict__[self.key] = value
 
     def __delete__(self, instance):
-        print('-->delete<---')
+        print('--->delete<---')
         instance.__dict__.pop(self.key)
 
 
+def deco(**kwargs):
+    """deco function"""
+    print('---->', kwargs)
+
+    def wrapper(obj):
+        for key,key_type in kwargs.items():
+            setattr(obj, key, Typed(key, key_type))
+        return obj
+    return wrapper
+
+
+@deco(name=str, age=int)
 class People:
     """People class"""
-    name = Typed('name', str)
-    age = Typed('age', int)
+    # name = Typed('name', str)
+    # age = Typed('age', int)
 
     def __init__(self, name, age, salary):
         self.name = name
@@ -80,8 +92,8 @@ def t10():
 def t11():
     p1 = People('tim', 100, 12.99)
     print(p1.__dict__)
-    p2 = People('summer', 12.99, 30.21)
-    print(p1.__dict__)
+    p2 = People('summer', 12, 30.21)
+    print(p2.__dict__)
 
 if __name__ == '__main__':
     t11()
