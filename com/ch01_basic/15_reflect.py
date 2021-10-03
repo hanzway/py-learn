@@ -20,7 +20,8 @@ class Home(object):
 def t1():
     home1 = Home('jerry')
     if not hasattr(home1, 'say_hi'):
-        home1.say_hi = welcome
+        # home1.say_hi = welcome
+        setattr(home1, 'say_hi', welcome)
     home1.say_hi()
 
 
