@@ -51,7 +51,4 @@ class Foo2:
 
 
 if __name__ == '__main__':
-    foo = Foo(age=100, name='tom')
-    print(foo.name)
-    print(foo.age)
-    del foo.name
+    pass
