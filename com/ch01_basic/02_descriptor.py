@@ -5,7 +5,16 @@
 # @File    : 02_descriptor.py
 # @Software: PyCharm
 
-# 数据描述符的优先级： 类属性 - 数据描述符 - 实例属性 - 非数据描述符 - __getattr__
+"""
+1. 数据描述符的优先级： 类属性 - 数据描述符 - 实例属性 - 非数据描述符 - __getattr__
+2、 无参装饰器
+3、 有参装饰器
+"""
+import json
+import os
+import time
+
+
 class Typed(object):
 
     def __init__(self, key, wantedType):
@@ -110,5 +119,60 @@ def index2(x, y):
 def t02():
     print(index2(100, 30))
 
+
+# 1. 无参装饰器
+def decr2(func):
+    def wrapper(*args, **kwargs):
+        print('do something before exec function')
+        result = func(*args, **kwargs)
+        return result
+    return wrapper
+
+@decr2
+def the_real_func(x:int, y:int):
+    return x + y
+
+
+def inst_time():
+    return time.strftime('%Y-%m-%d %X', time.localtime())
+
+
+# 2. 有参装饰器:将执行函数的实参保存到指定文件中：real_param.txt
+
+def save_args(the_file_location):
+    def decr3(func):
+        def wrapper(*args, **kwargs):
+            with open(the_file_location, 'a+', encoding='utf-8') as f:
+                f.writelines([inst_time(), '\t',json.dumps(args), json.dumps(kwargs)])
+                f.write(os.linesep)
+            result = func(*args, **kwargs)
+            return result
+        return wrapper
+    return decr3
+
+
+@save_args(the_file_location='args.txt')
+def calc_div(num1:int, num2:int):
+    return num1 // num2
+
+
+def main():
+    calc_div(100, 2)
+
 if __name__ == '__main__':
-    t02()
+    main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
