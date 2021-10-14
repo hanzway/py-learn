@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 2021/9/12 18:58
-# @Author  : ksu will han
-# @File    : conftest.py
-# @Software: PyCharm
+
 import random
+import string
 
 import pytest
 
@@ -25,6 +23,19 @@ def search_case(request):
     else:
         caseData = case_info['defaultList']
     return caseData
+
+
+def base_login(username, pwd):
+    return '_'.join([username, pwd, ''.join(random.sample(string.ascii_letters, 6))])
+
+
+@pytest.fixture(scope='function', name='token_info')
+def get_token(request):
+    index = request.node.get_closest_marker('get_token')
+    user_info = index.args[0]
+    username = user_info.get('name')
+    pwd = user_info.get('pwd')
+    return base_login(username, pwd)
 
 
 if __name__ == '__main__':

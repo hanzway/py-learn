@@ -2,7 +2,13 @@
 # -*- coding: utf-8 -*-
 # @Time : 2021/10/1 16:04
 
-from ch01_pkg.c1 import c11
-from ch01_pkg.c2 import c21
+import os, sys
 
-# 包的绝对导入
+base_dir = os.path.dirname(__name__)
+sys.path.append(base_dir)
+
+from .c1 import c11
+from .c2 import c21
+from .Calc import Calc
+
+

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 2021/9/12 19:41
+
 import random
 
 import pytest
@@ -22,6 +22,15 @@ def test_data(request):
 def test_one(the_age):
     print('\ntest data: {}'.format(the_age))
     assert the_age > 60
+
+
+@pytest.mark.parametrize(argnames='location_style, element_id',
+                         argvalues=[('id', 'kw'), ('text', '搜索')])
+@pytest.mark.get_token({'name':'Tom', 'pwd':'123'})
+def test_query_profile(token_info, location_style, element_id):
+    print('token-info:',token_info )
+    print('定位方式：', location_style)
+    print('定位方式的值：', element_id)
 
 
 if __name__ == '__main__':
