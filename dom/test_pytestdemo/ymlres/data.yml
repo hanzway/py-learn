@@ -1,0 +1,33 @@
+add_data:
+  - [10, 4, 14]
+  - [10, 6, 16]
+  - [10, 20, 30]
+
+div_data:
+  - [100, 2, 50]
+  - [100, 4, 25]
+  - [100, 25, 4]
+
+persons:
+  tom:
+    id: 100
+    name: tom100
+    age: 20
+    hoppy:
+      - football
+      - basketball
+  jerry:
+    id: 101
+    name: jerry101
+    age: 21
+    hoppy:
+      - study
+      - books
+  summer:
+    id: 102
+    name: summer102
+    age: 22
+    hoppy:
+      - jogging
+      - chess
+      - travelling
