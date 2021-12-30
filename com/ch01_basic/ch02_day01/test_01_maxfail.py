@@ -20,11 +20,6 @@ import pytest
 from com.ch01_basic.ch01_pkg.Calc import Calc
 
 
-
-
-
-
-
 class TestCalc:
     """测试类：calc"""
     calc = Calc(100, 25)
@@ -41,6 +36,25 @@ class TestCalc:
 
     def test_div(self):
         assert self.calc.div() == 5
+
+"""
+cache, capfd, capfdbinary, caplog, capsys,
+ capsysbinary, doctest_namespace, monkeypatch, 
+ pytestconfig, record_property, 
+ record_testsuite_property, record_xml_attribute, recwarn, 
+tmp_path, tmp_path_factory, tmpdir, tmpdir_factory
+"""
+
+def test_tempdir_factory(tmpdir):
+    print('test-tempdir-factory')
+    # \Users\qingwei.han\AppData\Local\Temp\pytest-of-qingwei.han\pytest-14\test_tempdir_factory0
+    print(tmpdir)
+
+
+def test_tempdir_factory(tmp_path):
+    print('test-tmp_path')
+    # C:\Users\qingwei.han\AppData\Local\Temp\pytest-of-qingwei.han\pytest-15\test_tempdir_factory0
+    print(tmp_path)
 
 
 if __name__ == '__main__':
